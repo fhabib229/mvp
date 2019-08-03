@@ -4,10 +4,9 @@ import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import Geocoder from 'react-map-gl-geocoder';
+import TOKEN from '../config/mapboxToken';
 
 // test coordinates: [-122.317768,47.67894]
-
-const TOKEN = 'pk.eyJ1IjoiZmhhYmliMjI5IiwiYSI6ImNqdGh4bGdpbTJqZ200NGw2MHZjeWRxNmQifQ.tlDfQTj0WG4yCieBwyqrmQ'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class App extends React.Component {
     this.state = {
       isLoaded: false,
       error: null,
+      token: TOKEN,
       trails: null,
       showMarkers: false,
       showPopups: false,
@@ -111,12 +111,12 @@ class App extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
           onViewportChange={(viewport) => this.setState({viewport})}
-          mapboxApiAccessToken={TOKEN}
+          mapboxApiAccessToken={mapInfo.token}
         >
         <Geocoder
           mapRef={this.mapRef}
           onViewportChange={this.handleGeocoderViewportChange}
-          mapboxApiAccessToken={TOKEN}
+          mapboxApiAccessToken={mapInfo.token}
           position="top-left"
           placeholder="Seek and ye shall find"
           zoom={10}

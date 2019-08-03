@@ -1,4 +1,8 @@
-### node etc ###
+### bundle ###
+client/public/bundle.js
+
+#Token
+client/src/config
 
 # Logs
 logs

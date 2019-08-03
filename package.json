@@ -39,7 +39,7 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.19",
     "nodemon": "^1.18.10",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
   }
 }
