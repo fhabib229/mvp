@@ -111,7 +111,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { token, isLoaded, error, trails, showMarkers, popupInfo, queryParams, viewport } = this.state;
+    const { token, isLoaded, error, trails, showMarkers, queryParams, viewport } = this.state;
 
     if (error) {
       return <div>Error...{error.message}</div>
@@ -120,37 +120,37 @@ class App extends React.Component {
     } else {
       return (
         <div style={{ height: "100vh" }}>
-        <ReactMapGl
-          {...viewport}
-          width={750}
-          height="100%"
-          mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
-          mapboxApiAccessToken={token}
-          onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
-        >
-        <Geocoder
-          viewport={viewport}
-          mapboxApiAccessToken={token}
-          onSelected={this.handleViewportChange}
-          transitionDuration={1000}
-          hideOnSelect={true}
-          queryParams={queryParams}
-          pointZoom={8}
-          inputComponent={searchPlaceholder}
-        />
-        {showMarkers && (
-          trails.map((trail, i) => {
-            if (i <= 4) {
-              return (
-              <Marker key={`marker-${i}`} longitude={trail.coordinates[0]} latitude={trail.coordinates[1]}>
-                <TrailMarker size={20} onClick={() => this.setState({ popupInfo: trail})} />
-              </Marker>
-              );
-            }
-          })
-        )}
-        {this.renderPopups()}
-        </ReactMapGl>
+          <ReactMapGl
+            {...viewport}
+            width={750}
+            height="100%"
+            mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
+            mapboxApiAccessToken={token}
+            onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
+          >
+          <Geocoder
+            viewport={viewport}
+            mapboxApiAccessToken={token}
+            onSelected={this.handleViewportChange}
+            transitionDuration={1000}
+            hideOnSelect={true}
+            queryParams={queryParams}
+            pointZoom={8}
+            inputComponent={searchPlaceholder}
+          />
+          {showMarkers && (
+            trails.map((trail, i) => {
+              if (i <= 4) {
+                return (
+                <Marker key={`marker-${i}`} longitude={trail.coordinates[0]} latitude={trail.coordinates[1]}>
+                  <TrailMarker size={20} onClick={() => this.setState({ popupInfo: trail})} />
+                </Marker>
+                );
+              }
+            })
+          )}
+          {this.renderPopups()}
+          </ReactMapGl>
         </div>
       );
     }
