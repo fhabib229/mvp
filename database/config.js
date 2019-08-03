@@ -11,7 +11,13 @@ db.once('open', () => {
 const trailsSchema = mongoose.Schema({
   trail_name: { type: String, unique: true},
   coordinates: Array,
-  distance_from_addr: Number
+  length_roundtrip: Number,
+  gain: Number,
+  rating: Number,
+  parking_pass: String,
+  region: String,
+  distance_from_addr: Number,
+  link: String
 });
 
 const Trails = mongoose.model('Trails', trailsSchema);
