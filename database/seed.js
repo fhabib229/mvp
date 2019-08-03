@@ -3,154 +3,604 @@ const Trails = require('./config');
 
 const sampleData = [
   {
-    id: 1, trail_name: 'Cowen and Ravenna Parks', coordinates: [-122.3144, 47.6720], distance_from_addr: 0
+    id: 1,
+    trail_name: 'Cowen and Ravenna Parks',
+    coordinates: [-122.3144, 47.6720],
+    length_roundtrip: 4.5,
+    gain: 115,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/cowen-and-ravenna-parks'
   },
   {
-    id: 2, trail_name: 'Green Lake', coordinates: [-122.3401, 47.6690], distance_from_addr: 0
+    id: 2,
+    trail_name: 'Green Lake',
+    coordinates: [-122.3401, 47.6690],
+    length_roundtrip: 2.8,
+    gain: 0,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/green-lake-1'
   },
   {
-    id: 3, trail_name: 'Carkeek Park', coordinates: [-122.3634, 47.7033], distance_from_addr: 0
+    id: 3,
+    trail_name: 'Carkeek Park',
+    coordinates: [-122.3634, 47.7033],
+    length_roundtrip: 3.5,
+    gain: 800,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/carkeek-park'
   },
   {
-    id: 4, trail_name: 'Cheshiahud Lake Union Loop', coordinates: [-122.3362, 47.6460], distance_from_addr: 0
+    id: 4,
+    trail_name: 'Cheshiahud Lake Union Loop',
+    coordinates: [-122.3362, 47.6460],
+    length_roundtrip: 6.0,
+    gain: 0,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/chesiahud-lake-union-loop'
   },
   {
-    id: 5, trail_name: 'Washington Park Arboretum', coordinates: [-122.2905, 47.6416], distance_from_addr: 0
+    id: 5,
+    trail_name: 'Washington Park Arboretum',
+    coordinates: [-122.2905, 47.6416],
+    length_roundtrip: 5.0,
+    gain: 50,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/washington-park-arboretum'
   },
   {
-    id: 6, trail_name: 'Magnuson Park', coordinates: [-122.2559, 47.6770], distance_from_addr: 0
+    id: 6,
+    trail_name: 'Magnuson Park',
+    coordinates: [-122.2559, 47.6770],
+    length_roundtrip: 3.0,
+    gain: 15,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Puget Sound & Islands',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/magnuson-park'
   },
   {
-    id: 7, trail_name: 'Mount Si', coordinates:  [-121.7231, 47.4880], distance_from_addr: 0
+    id: 7,
+    trail_name: 'Mount Si',
+    coordinates:  [-121.7231, 47.4880],
+    length_roundtrip: 8.0,
+    gain: 3150,
+    rating: 4,
+    parking_pass: 'Discover Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-si'
   },
   {
-    id: 8, trail_name: 'Granite Mountain', coordinates: [-121.4860, 47.3979], distance_from_addr: 0
+    id: 8,
+    trail_name: 'Granite Mountain',
+    coordinates: [-121.4860, 47.3979],
+    length_roundtrip: 8.6,
+    gain: 3800,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/granite-mountain'
   },
   {
-    id: 9, trail_name: 'Mailbox Peak', coordinates: [-121.6748, 47.4675], distance_from_addr: 0
+    id: 9,
+    trail_name: 'Mailbox Peak',
+    coordinates: [-121.6748, 47.4675],
+    length_roundtrip: 9.4,
+    gain: 4000,
+    rating: 4,
+    parking_pass: 'Discover Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mailbox-peak'
   },
   {
-    id: 10, trail_name: 'Enchanted Valley (via East Fork Quinault River)', coordinates: [-123.5694, 47.5730], distance_from_addr: 0
+    id: 10,
+    trail_name: 'Enchanted Valley (via East Fork Quinault River)',
+    coordinates: [-123.5694, 47.5730],
+    length_roundtrip: 26.0,
+    gain: 1700,
+    rating: 4,
+    parking_pass: 'None',
+    region: 'Olympic Peninsula',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/enchanted-valley'
   },
   {
-    id: 11, trail_name: 'Mount Washington', coordinates: [ -121.6722, 47.4420], distance_from_addr: 0
+    id: 11,
+    trail_name: 'Mount Washington',
+    coordinates: [ -121.6722, 47.4420],
+    length_roundtrip: 8.5,
+    gain: 3250,
+    rating: 4,
+    parking_pass: 'Discover Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-washington-1'
   },
   {
-    id: 12, trail_name: 'Pete Lake', coordinates: [-121.1855, 47.4350], distance_from_addr: 0
+    id: 12,
+    trail_name: 'Pete Lake',
+    coordinates: [-121.1855, 47.4350],
+    length_roundtrip: 9.0,
+    gain: 400,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/pete-lake'
   },
   {
-    id: 13, trail_name: 'Esmeralda Basin', coordinates: [-120.9372, 47.4361], distance_from_addr: 0
+    id: 13,
+    trail_name: 'Esmeralda Basin',
+    coordinates: [-120.9372, 47.4361],
+    length_roundtrip: 7.0,
+    gain: 1750,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/esmerelda-basin'
   },
   {
-    id: 14, trail_name: 'Heather Lake', coordinates: [-121.7740, 48.0829], distance_from_addr: 0
+    id: 14,
+    trail_name: 'Heather Lake',
+    coordinates: [-121.7740, 48.0829],
+    length_roundtrip: 4.6,
+    gain: 1034,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/heather-lake-1'
   },
   {
-    id: 15, trail_name: 'Annette Lake', coordinates: [-121.4741, 47.3928], distance_from_addr: 0
+    id: 15,
+    trail_name: 'Annette Lake',
+    coordinates: [-121.4741, 47.3928],
+    length_roundtrip: 7.5,
+    gain: 1800,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/annette-lake'
   },
   {
-    id: 16, trail_name: 'Glacier Basin', coordinates: [-121.3930, 47.9870], distance_from_addr: 0
+    id: 16,
+    trail_name: 'Glacier Basin',
+    coordinates: [-121.3930, 47.9870],
+    length_roundtrip: 12.0,
+    gain: 2159,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/glacier-basin-1'
   },
   {
-    id: 17, trail_name: 'Cutthroat Lake', coordinates: [-120.6547, 48.5563], distance_from_addr: 0
+    id: 17,
+    trail_name: 'Cutthroat Lake',
+    coordinates: [-120.6547, 48.5563],
+    length_roundtrip: 3.8,
+    gain: 400,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/cutthroat-lake'
   },
   {
-    id: 18, trail_name: 'Big Four Ice Caves', coordinates: [-121.5107, 48.0659], distance_from_addr: 0
+    id: 18,
+    trail_name: 'Big Four Ice Caves',
+    coordinates: [-121.5107, 48.0659],
+    length_roundtrip: 2.2,
+    gain: 220,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/big-four-ice-caves'
   },
   {
-    id: 19, trail_name: 'Perry Creek', coordinates: [ -121.4907, 48.0541], distance_from_addr: 0
+    id: 19,
+    trail_name: 'Perry Creek',
+    coordinates: [ -121.4907, 48.0541],
+    length_roundtrip: 10.5,
+    gain: 3400,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/perry-creek'
   },
   {
-    id: 20, trail_name: 'Mount Dickerman', coordinates: [-121.4900, 48.0538], distance_from_addr: 0
+    id: 20,
+    trail_name: 'Mount Dickerman',
+    coordinates: [-121.4900, 48.0538],
+    length_roundtrip: 8.2,
+    gain: 3950,
+    rating: 5,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-dickerman'
   },
   {
-    id: 21, trail_name: 'Mount Pilchuck', coordinates: [-121.8147, 48.0702], distance_from_addr: 0
+    id: 21,
+    trail_name: 'Mount Pilchuck',
+    coordinates: [-121.8147, 48.0702],
+    length_roundtrip: 5.4,
+    gain: 2300,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-pilchuck'
   },
   {
-    id: 22, trail_name: 'Lake 22', coordinates: [-121.7457, 48.0770], distance_from_addr: 0
+    id: 22,
+    trail_name: 'Lake 22',
+    coordinates: [-121.7457, 48.0770],
+    length_roundtrip: 5.4,
+    gain: 1350,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/lake-22-lake-twenty-two'
   },
   {
-    id: 23, trail_name: 'Rattlesnake Ledge', coordinates: [-121.7687, 47.4347], distance_from_addr: 0
+    id: 23,
+    trail_name: 'Rattlesnake Ledge',
+    coordinates: [-121.7687, 47.4347],
+    length_roundtrip: 4.0,
+    gain: 1160,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/rattle-snake-ledge'
   },
   {
-    id: 24, trail_name: 'Spectacle Lake', coordinates: [-121.1888, 47.4337], distance_from_addr: 0
+    id: 24,
+    trail_name: 'Spectacle Lake',
+    coordinates: [-121.1888, 47.4337],
+    length_roundtrip: 22.0,
+    gain: 1500,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/spectacle-lake'
   },
   {
-    id: 25, trail_name: 'Talapus and Olallie Lakes', coordinates: [-121.5190, 47.4007], distance_from_addr: 0
+    id: 25,
+    trail_name: 'Talapus and Olallie Lakes',
+    coordinates: [-121.5190, 47.4007],
+    length_roundtrip: 6.2,
+    gain: 1220,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/talapus-lake'
   },
   {
-    id: 26, trail_name: 'Ira Spring Trail - Mason Lake', coordinates: [-121.5843, 47.4257], distance_from_addr: 0
+    id: 26,
+    trail_name: 'Ira Spring Trail - Mason Lake',
+    coordinates: [-121.5843, 47.4257],
+    length_roundtrip: 6.5,
+    gain: 2420,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/ira-spring-memorial'
   },
   {
-    id: 27, trail_name: 'Bandera Mountain', coordinates: [-121.5836, 47.4247], distance_from_addr: 0
+    id: 27,
+    trail_name: 'Bandera Mountain',
+    coordinates: [-121.5836, 47.4247],
+    length_roundtrip: 8.0,
+    gain: 3400,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/bandera-mountain'
   },
   {
-    id: 28, trail_name: 'Goat Lake', coordinates: [-121.4113, 48.0537], distance_from_addr: 0
+    id: 28,
+    trail_name: 'Goat Lake',
+    coordinates: [-121.4113, 48.0537],
+    length_roundtrip: 10.4,
+    gain: 1400,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/goat-lake'
   },
   {
-    id: 29, trail_name: 'Diablo Lake', coordinates: [-121.1216, 48.7206], distance_from_addr: 0
+    id: 29,
+    trail_name: 'Diablo Lake',
+    coordinates: [-121.1216, 48.7206],
+    length_roundtrip: 7.6,
+    gain: 1400,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/diablo-lake'
   },
   {
-    id: 30, trail_name: 'Sourdough Mountain', coordinates: [-121.1455, 48.7179], distance_from_addr: 0
+    id: 30,
+    trail_name: 'Sourdough Mountain',
+    coordinates: [-121.1455, 48.7179],
+    length_roundtrip: 10.4,
+    gain: 4870,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'North Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/sourdough-mountain'
   },
   {
-    id: 31, trail_name: 'Snow Lake', coordinates: [-121.4230, 47.4454], distance_from_addr: 0
+    id: 31,
+    trail_name: 'Snow Lake',
+    coordinates: [-121.4230, 47.4454],
+    length_roundtrip: 7.2,
+    gain: 1800,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/snow-lake-1'
   },
   {
-    id: 32, trail_name: 'Melakwa Lake', coordinates: [-121.4432, 47.4151], distance_from_addr: 0
+    id: 32,
+    trail_name: 'Melakwa Lake',
+    coordinates: [-121.4432, 47.4151],
+    length_roundtrip: 8.5,
+    gain: 2700,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/melakwa-lake'
   },
   {
-    id: 33, trail_name: 'Denny Creek', coordinates: [-121.4433, 47.4154], distance_from_addr: 0
+    id: 33,
+    trail_name: 'Denny Creek',
+    coordinates: [-121.4433, 47.4154],
+    length_roundtrip: 6.0,
+    gain: 1345,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/denny-creek'
   },
   {
-    id: 34, trail_name: 'Mount Teneriffe', coordinates: [-121.7097, 47.4869], distance_from_addr: 0
+    id: 34,
+    trail_name: 'Mount Teneriffe',
+    coordinates: [-121.7097, 47.4869],
+    length_roundtrip: 13.0,
+    gain: 3800,
+    rating: 4,
+    parking_pass: 'Discover Pass',
+    region: 'Snoqualmie Region',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-teneriffe'
   },
   {
-    id: 35, trail_name: 'Mount Storm King', coordinates: [-123.7892, 48.0582], distance_from_addr: 0
+    id: 35,
+    trail_name: 'Mount Storm King',
+    coordinates: [-123.7892, 48.0582],
+    length_roundtrip: 4.0,
+    gain: 2065,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Olympic Peninsula',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-storm-king'
   },
   {
-    id: 36, trail_name: 'Gladys Divide', coordinates: [-123.3324, 47.5182], distance_from_addr: 0
+    id: 36,
+    trail_name: 'Gladys Divide',
+    coordinates: [-123.3324, 47.5182],
+    length_roundtrip: 20.0,
+    gain: 4000,
+    rating: 3,
+    parking_pass: 'National Park Pass',
+    region: 'Olympic Peninsula',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/gladys-divide-primitive'
   },
   {
-    id: 37, trail_name: 'Lena Lake', coordinates: [-123.1512, 47.5997], distance_from_addr: 0
+    id: 37,
+    trail_name: 'Lena Lake',
+    coordinates: [-123.1512, 47.5997],
+    length_roundtrip: 7.2,
+    gain: 1300,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Olympic Peninsula',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/lena-lake'
   },
   {
-    id: 38, trail_name: 'Big Creek', coordinates: [-123.2110, 47.4933], distance_from_addr: 0
+    id: 38,
+    trail_name: 'Big Creek',
+    coordinates: [-123.2110, 47.4933],
+    length_roundtrip: 4.3,
+    gain: 850,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Olympic Peninsula',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/big-creek'
   },
   {
-    id: 39, trail_name: 'Truman Trail - Pumice Plains', coordinates: [-122.1361, 46.2499], distance_from_addr: 0
+    id: 39,
+    trail_name: 'Truman Trail - Pumice Plains',
+    coordinates: [-122.1361, 46.2499],
+    length_roundtrip: 10.0,
+    gain: 1425,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'South Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/truman-trail-pumice-plain'
   },
   {
-    id: 40, trail_name: 'Mount St. Helens - Monitor Ridge', coordinates: [-122.1835, 46.1461], distance_from_addr: 0
+    id: 40,
+    trail_name: 'Mount St. Helens - Monitor Ridge',
+    coordinates: [-122.1835, 46.1461],
+    length_roundtrip: 10.0,
+    gain: 4500,
+    rating: 4,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'South Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/mount-st-helens-monitor-ridge'
   },
   {
-    id: 41, trail_name: 'Angry Mountain', coordinates: [-121.5944, 46.5184], distance_from_addr: 0
+    id: 41,
+    trail_name: 'Angry Mountain',
+    coordinates: [-121.5944, 46.5184],
+    length_roundtrip: 16.8,
+    gain: 3409,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'South Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/angry-mountain'
   },
   {
-    id: 42, trail_name: 'Harry\'s Ridge', coordinates: [-122.2165, 46.2765], distance_from_addr: 0
+    id: 42,
+    trail_name: 'Harry\'s Ridge',
+    coordinates: [-122.2165, 46.2765],
+    length_roundtrip: 8.2,
+    gain: 970,
+    rating: 4,
+    parking_pass: 'National Monument Fee',
+    region: 'South Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/harrys-ridge'
   },
   {
-    id: 43, trail_name: 'Fossil Trail', coordinates: [-122.3241, 46.1429], distance_from_addr: 0
+    id: 43,
+    trail_name: 'Fossil Trail',
+    coordinates: [-122.3241, 46.1429],
+    length_roundtrip: 8.0,
+    gain: 1300,
+    rating: 5,
+    parking_pass: 'National Monument Fee',
+    region: 'South Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/fossil-trail'
   },
   {
-    id: 44, trail_name: 'Lake Serene', coordinates: [-121.5738, 47.8090], distance_from_addr: 0
+    id: 44,
+    trail_name: 'Lake Serene',
+    coordinates: [-121.5738, 47.8090],
+    length_roundtrip: 8.2,
+    gain: 2000,
+    rating: 5,
+    parking_pass: 'Northwest Forest Pass',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/lake-serene'
   },
   {
-    id: 45, trail_name: 'Wallace Falls State Park', coordinates: [-121.6780, 47.8669], distance_from_addr: 0
+    id: 45,
+    trail_name: 'Wallace Falls State Park',
+    coordinates: [-121.6780, 47.8669],
+    length_roundtrip: 5.6,
+    gain: 1300,
+    rating: 4,
+    parking_pass: 'Discover Pass',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/wallace-falls'
   },
   {
-    id: 46, trail_name: 'Boulder Lake', coordinates: [-121.5560, 47.9703], distance_from_addr: 0
+    id: 46,
+    trail_name: 'Boulder Lake',
+    coordinates: [-121.5560, 47.9703],
+    length_roundtrip: 13.8,
+    gain: 2140,
+    rating: 2,
+    parking_pass: 'Disocver pass',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/boulder-lake'
   },
   {
-    id: 47, trail_name: 'Sauer\'s Mountain', coordinates: [-120.5992, 47.5881], distance_from_addr: 0
+    id: 47,
+    trail_name: 'Sauer\'s Mountain',
+    coordinates: [-120.5992, 47.5881],
+    length_roundtrip: 6.0,
+    gain: 2000,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/sauer-mountain'
   },
   {
-    id: 48, trail_name: 'Beckler Peak', coordinates: [-121.2655, 47.7268], distance_from_addr: 0
+    id: 48,
+    trail_name: 'Beckler Peak',
+    coordinates: [-121.2655, 47.7268],
+    length_roundtrip: 7.6,
+    gain: 2240,
+    rating: 5,
+    parking_pass: 'none',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/beckler-peak'
   },
   {
-    id: 49, trail_name: 'Greider Lakes', coordinates: [-121.5795, 47.9747], distance_from_addr: 0
+    id: 49,
+    trail_name: 'Greider Lakes',
+    coordinates: [-121.5795, 47.9747],
+    length_roundtrip: 8.6,
+    gain: 1370,
+    rating: 3,
+    parking_pass: 'none',
+    region: 'Central Cascades',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/greider-lakes'
   },
   {
-    id: 50, trail_name: 'Poo Poo Point', coordinates: [-122.0299, 47.5195], distance_from_addr: 0
+    id: 50,
+    trail_name: 'Poo Poo Point',
+    coordinates: [-122.0299, 47.5195],
+    length_roundtrip: 7.2,
+    gain: 1858,
+    rating: 4,
+    parking_pass: 'none',
+    region: 'Issaquah Alps',
+    distance_from_addr: 0,
+    link: 'https://www.wta.org/go-hiking/hikes/poo-poo-point'
   },
 ];
 
