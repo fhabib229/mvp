@@ -97,6 +97,7 @@ class App extends React.Component {
 
   handleViewportChange(viewport, item) {
     this.setState({viewport});
+    this.sortTrails();
     console.log('Selected: ', item);
     console.log('Viewport: ', viewport);
   }
