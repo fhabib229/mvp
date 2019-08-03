@@ -3,6 +3,7 @@ import ReactMapGl, { Popup, Marker } from 'react-map-gl';
 import axios from 'axios';
 import Geocoder from 'react-mapbox-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
+import TrailMarker from './TrailMarker.jsx';
 
 // TODO:
 //  Refactor trail popups and markers into separate component
@@ -33,7 +34,7 @@ class App extends React.Component {
       viewport: {
         latitude: 47.67894,
         longitude: -122.317768,
-        zoom: 10
+        zoom: 7
       }
     };
 
@@ -124,45 +125,18 @@ class App extends React.Component {
           onSelected={this.handleViewportChange}
           hideOnSelect={true}
           queryParams={queryParams}
+          pointZoom={10}
           inputComponent={searchPlaceholder}
         />
         {showPopups && (
-          <div>
-              <Popup latitude={trails[0].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{trails[0].trail_name}</div>
-              </Popup>
-              <Popup latitude={trails[1].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{trails[1].trail_name}</div>
-              </Popup>
-              <Popup latitude={trails[2].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{trails[2].trail_name}</div>
-              </Popup>
-              <Popup latitude={trails[3].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{trails[3].trail_name}</div>
-              </Popup>
-              <Popup latitude={trails[4].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{trails[4].trail_name}</div>
-              </Popup>
-            </div>
+          <div></div>
         )}
         {showMarkers && (
-            <div>
-              <Marker latitude={trails[0].coordinates[1]} longitude={trails[0].coordinates[0]}>
-                <div>⛰️</div>
-              </Marker>
-              <Marker latitude={trails[1].coordinates[1]} longitude={trails[0].coordinates[0]}>
-                <div>⛰️</div>
-              </Marker>
-              <Marker latitude={trails[2].coordinates[1]} longitude={trails[0].coordinates[0]}>
-                <div>⛰️</div>
-              </Marker>
-              <Marker latitude={trails[3].coordinates[1]} longitude={trails[0].coordinates[0]}>
-                <div>⛰️</div>
-              </Marker>
-              <Marker latitude={trails[4].coordinates[1]} longitude={trails[0].coordinates[0]}>
-                <div>⛰️</div>
-              </Marker>
-            </div>
+          trails.map((trail, i) =>
+            <Marker key={`marker-${i}`} longitude={trail.coordinates[0]} latitude={trail.coordinates[1]}>
+              <TrailMarker size={20} onClick={() => this.setState({showPopups: true})} />
+            </Marker>
+          )
         )}
         </ReactMapGl>
         </div>
