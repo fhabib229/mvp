@@ -1,5 +1,5 @@
-import Example from './components/example.jsx';
+import App from './components/App.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<Example />, document.getElementById('map'));
+ReactDOM.render(<App />, document.getElementById('map'));
