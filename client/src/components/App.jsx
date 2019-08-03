@@ -4,6 +4,18 @@ import axios from 'axios';
 import Geocoder from 'react-map-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
 
+// TODO:
+//  Refactor geocoder to use react-mapbox-gl-geocoder instead
+//  Refactor trail popups and markers into separate component
+//  Include additional info in trail markers and popups
+//  Use deck.gl to render marker of input address on screen?
+//  Add navigation component
+//    -trails by region
+//    -trails by difficulty (gain & length)
+//    -trails by pass requirements
+//    -trails by rating
+//  Style application
+
 // test coordinates: [-122.317768,47.67894]
 
 class App extends React.Component {
