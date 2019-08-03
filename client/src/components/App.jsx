@@ -113,11 +113,11 @@ class App extends React.Component {
         <div style={{ height: "100vh" }}>
         <ReactMapGl
           {...viewport}
-          width="100%"
+          width={750}
           height="100%"
-          onViewportChange={this.handleViewportChange}
           mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
           mapboxApiAccessToken={token}
+          onViewportChange={(newViewport) => this.setState({viewport: newViewport})}
         >
         <Geocoder
           viewport={viewport}
