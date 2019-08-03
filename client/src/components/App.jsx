@@ -5,7 +5,6 @@ import Geocoder from 'react-mapbox-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
 
 // TODO:
-//  Refactor geocoder to use react-mapbox-gl-geocoder instead
 //  Refactor trail popups and markers into separate component
 //  Include additional info in trail markers and popups
 //  Use deck.gl to render marker of input address on screen?
@@ -16,7 +15,7 @@ import TOKEN from '../config/mapboxToken';
 //    -trails by rating
 //  Style application
 
-// test coordinates: [-122.317768,47.67894]
+const searchPlaceholder = (props) => <input {...props} placeholder="Search" />
 
 class App extends React.Component {
   constructor(props) {
@@ -86,7 +85,6 @@ class App extends React.Component {
   calculateNearestTrails(inputLongitude, inputLatitude, trailCoord) {
     // distance formula
     let distance = Math.sqrt(((trailCoord[0] - inputLongitude)**2) + ((trailCoord[1] - inputLatitude)**2));
-    console.log('Longitude: ', inputLongitude, ' and Latitude: ', inputLatitude);
     return distance;
   }
 
@@ -126,6 +124,7 @@ class App extends React.Component {
           onSelected={this.handleViewportChange}
           hideOnSelect={true}
           queryParams={queryParams}
+          inputComponent={searchPlaceholder}
         />
         {showPopups && (
           <div>
