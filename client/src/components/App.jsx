@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMapGl, { Popup, Marker } from 'react-map-gl';
 import axios from 'axios';
-import Geocoder from 'react-map-gl-geocoder';
+import Geocoder from 'react-mapbox-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
 
 // TODO:
@@ -28,7 +28,9 @@ class App extends React.Component {
       trails: null,
       showMarkers: false,
       showPopups: false,
-      mapRef: React.createRef(),
+      queryParams: {
+        country: 'us'
+      },
       viewport: {
         latitude: 47.67894,
         longitude: -122.317768,
@@ -38,8 +40,8 @@ class App extends React.Component {
 
       this.sortTrails = this.sortTrails.bind(this);
       this.calculateNearestTrails = this.calculateNearestTrails.bind(this);
-      this.updateAddress = this.updateAddress.bind(this);
-      this.resize = this.resize.bind(this);
+      // this.updateAddress = this.updateAddress.bind(this);
+      this.handleViewportChange = this.handleViewportChange.bind(this);
   }
 
   componentDidMount() {
@@ -56,29 +58,21 @@ class App extends React.Component {
         error
       });
     });
-
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
-  resize() {
-    this.handleViewportChange({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
   }
 
   sortTrails() {
     // Mutates the trail data, calling the calculation function to return the distance from the input address
     let sortedTrailsByDistance = this.state.trails.map((trail) => {
       return {
+        trail_name: trail.trail_name,
         coordinates: trail.coordinates,
         distance_from_addr: this.calculateNearestTrails(this.state.viewport.longitude, this.state.viewport.latitude, trail.coordinates),
-        trail_name: trail.trail_name
+        length_roundtrip: trail.length_roundtrip,
+        gain: trail.gain,
+        rating: trail.rating,
+        parking_pass: trail.parking_pass,
+        region: trail.region,
+        link: trail.link
       }
     }).sort((a, b) => a.distance_from_addr - b.distance_from_addr);
 
@@ -96,89 +90,76 @@ class App extends React.Component {
     return distance;
   }
 
-  updateAddress(e) {
-    let coordinates = e.target.value.split(',').map(coordinate => Number(coordinate));
-    this.setState({ address: coordinates });
-  }
+  // updateAddress(e) {
+  //   let coordinates = e.target.value.split(',').map(coordinate => Number(coordinate));
+  //   this.setState({ address: coordinates });
+  // }
 
-  handleViewportChange = (viewport) => {
-    this.setState({
-      viewport: {...this.state.viewport, ...viewport }
-    });
-  }
-
-  handleGeocoderViewportChange = (viewport) => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides
-    });
+  handleViewportChange(viewport, item) {
+    this.setState({viewport});
+    console.log('Selected: ', item);
+    console.log('Viewport: ', viewport);
   }
 
   render() {
+    const { token, isLoaded, error, trails, showMarkers, showPopups, queryParams, viewport } = this.state;
 
-    let mapInfo  = this.state;
-
-    if (mapInfo.error) {
-      return <div>Error...{mapInfo.error.message}</div>
-    } else if (mapInfo.isLoaded === false) {
+    if (error) {
+      return <div>Error...{error.message}</div>
+    } else if (isLoaded === false) {
       return <div>Loading...</div>
     } else {
       return (
         <div style={{ height: "100vh" }}>
         <ReactMapGl
-          ref={mapInfo.mapRef}
-          {...mapInfo.viewport}
+          {...viewport}
           width="100%"
           height="100%"
           onViewportChange={this.handleViewportChange}
           mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
-          mapboxApiAccessToken={mapInfo.token}
+          mapboxApiAccessToken={token}
         >
         <Geocoder
-          mapRef={mapInfo.mapRef}
-          onViewportChange={this.handleGeocoderViewportChange}
-          mapboxApiAccessToken={mapInfo.token}
-          placeholder="Explore"
-          position="top-left"
-          zoom="10"
-          onClear={this.sortTrails}
+          viewport={viewport}
+          mapboxApiAccessToken={token}
+          onSelected={this.handleViewportChange}
+          hideOnSelect={true}
+          queryParams={queryParams}
         />
-        {mapInfo.showPopups && (
+        {showPopups && (
           <div>
-              <Popup latitude={mapInfo.trails[0].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{mapInfo.trails[0].trail_name}</div>
+              <Popup latitude={trails[0].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
+                <div>{trails[0].trail_name}</div>
               </Popup>
-              <Popup latitude={mapInfo.trails[1].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{mapInfo.trails[1].trail_name}</div>
+              <Popup latitude={trails[1].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
+                <div>{trails[1].trail_name}</div>
               </Popup>
-              <Popup latitude={mapInfo.trails[2].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{mapInfo.trails[2].trail_name}</div>
+              <Popup latitude={trails[2].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
+                <div>{trails[2].trail_name}</div>
               </Popup>
-              <Popup latitude={mapInfo.trails[3].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{mapInfo.trails[3].trail_name}</div>
+              <Popup latitude={trails[3].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
+                <div>{trails[3].trail_name}</div>
               </Popup>
-              <Popup latitude={mapInfo.trails[4].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]} tipsize={5} anchor='top'>
-                <div>{mapInfo.trails[4].trail_name}</div>
+              <Popup latitude={trails[4].coordinates[1]} longitude={trails[0].coordinates[0]} tipsize={5} anchor='top'>
+                <div>{trails[4].trail_name}</div>
               </Popup>
             </div>
         )}
-        {mapInfo.showMarkers && (
+        {showMarkers && (
             <div>
-              <Marker latitude={mapInfo.trails[0].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]}>
+              <Marker latitude={trails[0].coordinates[1]} longitude={trails[0].coordinates[0]}>
                 <div>⛰️</div>
               </Marker>
-              <Marker latitude={mapInfo.trails[1].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]}>
+              <Marker latitude={trails[1].coordinates[1]} longitude={trails[0].coordinates[0]}>
                 <div>⛰️</div>
               </Marker>
-              <Marker latitude={mapInfo.trails[2].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]}>
+              <Marker latitude={trails[2].coordinates[1]} longitude={trails[0].coordinates[0]}>
                 <div>⛰️</div>
               </Marker>
-              <Marker latitude={mapInfo.trails[3].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]}>
+              <Marker latitude={trails[3].coordinates[1]} longitude={trails[0].coordinates[0]}>
                 <div>⛰️</div>
               </Marker>
-              <Marker latitude={mapInfo.trails[4].coordinates[1]} longitude={mapInfo.trails[0].coordinates[0]}>
+              <Marker latitude={trails[4].coordinates[1]} longitude={trails[0].coordinates[0]}>
                 <div>⛰️</div>
               </Marker>
             </div>

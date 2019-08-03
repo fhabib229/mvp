@@ -24,7 +24,8 @@ class Example extends Component {
 
     onSelected = (viewport, item) => {
         this.setState({viewport});
-        console.log('Selected: ', item)
+        console.log('Selected: ', item);
+        console.log('Viewport: ', viewport);
     }
 
     render() {
