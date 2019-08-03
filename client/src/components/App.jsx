@@ -13,6 +13,7 @@ import TrailInfo from './TrailInfo.jsx';
 //    -trails by pass requirements
 //    -trails by rating
 //  Style application
+//  Implement a way to clear the markers so that a new address can be input without refreshing the page
 
 const searchPlaceholder = (props) => <input {...props} placeholder="Search" />
 
@@ -59,7 +60,7 @@ class App extends React.Component {
   }
 
   sortTrails() {
-    // Mutates the trail data, calling the calculation function to return the distance from the input address
+    // Mutates the trail data, calling calculateNearestTrails to return the distance from the input address
     let sortedTrailsByDistance = this.state.trails.map((trail) => {
       return {
         trail_name: trail.trail_name,
@@ -87,10 +88,8 @@ class App extends React.Component {
   }
 
   handleViewportChange(viewport, item) {
-    this.setState({viewport});
-    this.sortTrails();
-    console.log('Selected: ', item);
-    console.log('Viewport: ', viewport);
+    this.setState({viewport})
+    setTimeout(() => { this.sortTrails(); }, 3000);
   }
 
   renderPopups() {
@@ -133,9 +132,10 @@ class App extends React.Component {
           viewport={viewport}
           mapboxApiAccessToken={token}
           onSelected={this.handleViewportChange}
+          transitionDuration={1000}
           hideOnSelect={true}
           queryParams={queryParams}
-          pointZoom={10}
+          pointZoom={8}
           inputComponent={searchPlaceholder}
         />
         {showMarkers && (
