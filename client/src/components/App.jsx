@@ -4,11 +4,9 @@ import axios from 'axios';
 import Geocoder from 'react-mapbox-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
 import TrailMarker from './TrailMarker.jsx';
+import TrailInfo from './TrailInfo.jsx';
 
 // TODO:
-//  Refactor trail popups and markers into separate component
-//  Include additional info in trail markers and popups
-//  Use deck.gl to render marker of input address on screen?
 //  Add navigation component
 //    -trails by region
 //    -trails by difficulty (gain & length)
@@ -27,7 +25,7 @@ class App extends React.Component {
       token: TOKEN,
       trails: null,
       showMarkers: false,
-      showPopups: false,
+      popupInfo: null,
       queryParams: {
         country: 'us'
       },
@@ -40,8 +38,8 @@ class App extends React.Component {
 
       this.sortTrails = this.sortTrails.bind(this);
       this.calculateNearestTrails = this.calculateNearestTrails.bind(this);
-      // this.updateAddress = this.updateAddress.bind(this);
       this.handleViewportChange = this.handleViewportChange.bind(this);
+      this.renderPopups = this.renderPopups.bind(this);
   }
 
   componentDidMount() {
@@ -79,7 +77,6 @@ class App extends React.Component {
     this.setState({
       trails: sortedTrailsByDistance,
       showMarkers: true,
-      showPopups: true
     });
   }
 
@@ -89,11 +86,6 @@ class App extends React.Component {
     return distance;
   }
 
-  // updateAddress(e) {
-  //   let coordinates = e.target.value.split(',').map(coordinate => Number(coordinate));
-  //   this.setState({ address: coordinates });
-  // }
-
   handleViewportChange(viewport, item) {
     this.setState({viewport});
     this.sortTrails();
@@ -101,8 +93,26 @@ class App extends React.Component {
     console.log('Viewport: ', viewport);
   }
 
+  renderPopups() {
+    const { popupInfo } = this.state;
+
+    return (
+      popupInfo && (
+        <Popup
+          tipsize={5} anchor='top'
+          longitude={popupInfo.coordinates[0]}
+          latitude={popupInfo.coordinates[1]}
+          closeOnClick={false}
+          onClose={() => this.setState({ popupInfo: null })}
+          >
+            <TrailInfo info={popupInfo} />
+        </Popup>
+      )
+    );
+  }
+
   render() {
-    const { token, isLoaded, error, trails, showMarkers, showPopups, queryParams, viewport } = this.state;
+    const { token, isLoaded, error, trails, showMarkers, popupInfo, queryParams, viewport } = this.state;
 
     if (error) {
       return <div>Error...{error.message}</div>
@@ -128,16 +138,18 @@ class App extends React.Component {
           pointZoom={10}
           inputComponent={searchPlaceholder}
         />
-        {showPopups && (
-          <div></div>
-        )}
         {showMarkers && (
-          trails.map((trail, i) =>
-            <Marker key={`marker-${i}`} longitude={trail.coordinates[0]} latitude={trail.coordinates[1]}>
-              <TrailMarker size={20} onClick={() => this.setState({showPopups: true})} />
-            </Marker>
-          )
+          trails.map((trail, i) => {
+            if (i <= 4) {
+              return (
+              <Marker key={`marker-${i}`} longitude={trail.coordinates[0]} latitude={trail.coordinates[1]}>
+                <TrailMarker size={20} onClick={() => this.setState({ popupInfo: trail})} />
+              </Marker>
+              );
+            }
+          })
         )}
+        {this.renderPopups()}
         </ReactMapGl>
         </div>
       );
