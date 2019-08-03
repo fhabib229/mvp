@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactMapGl, { Popup, Marker } from 'react-map-gl';
 import axios from 'axios';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import Geocoder from 'react-map-gl-geocoder';
 import TOKEN from '../config/mapboxToken';
 
@@ -18,9 +16,8 @@ class App extends React.Component {
       trails: null,
       showMarkers: false,
       showPopups: false,
+      mapRef: React.createRef(),
       viewport: {
-        width: 750,
-        height: 750,
         latitude: 47.67894,
         longitude: -122.317768,
         zoom: 10
@@ -30,6 +27,7 @@ class App extends React.Component {
       this.sortTrails = this.sortTrails.bind(this);
       this.calculateNearestTrails = this.calculateNearestTrails.bind(this);
       this.updateAddress = this.updateAddress.bind(this);
+      this.resize = this.resize.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +43,20 @@ class App extends React.Component {
         isLoaded: true,
         error
       });
+    });
+
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize() {
+    this.handleViewportChange({
+      width: window.innerWidth,
+      height: window.innerHeight
     });
   }
 
@@ -77,8 +89,6 @@ class App extends React.Component {
     this.setState({ address: coordinates });
   }
 
-  mapRef = React.createRef();
-
   handleViewportChange = (viewport) => {
     this.setState({
       viewport: {...this.state.viewport, ...viewport }
@@ -104,22 +114,23 @@ class App extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <div>
+        <div style={{ height: "100vh" }}>
         <ReactMapGl
-          ref={this.mapRef}
+          ref={mapInfo.mapRef}
           {...mapInfo.viewport}
+          width="100%"
+          height="100%"
           onViewportChange={this.handleViewportChange}
           mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
-          onViewportChange={(viewport) => this.setState({viewport})}
           mapboxApiAccessToken={mapInfo.token}
         >
         <Geocoder
-          mapRef={this.mapRef}
+          mapRef={mapInfo.mapRef}
           onViewportChange={this.handleGeocoderViewportChange}
           mapboxApiAccessToken={mapInfo.token}
+          placeholder="Explore"
           position="top-left"
-          placeholder="Seek and ye shall find"
-          zoom={10}
+          zoom="10"
           onClear={this.sortTrails}
         />
         {mapInfo.showPopups && (
