@@ -22,7 +22,7 @@ const StyledPopup = styled.div`
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  padding: 5px;
+  padding: 3px;
   border-radius: 2px;
 `;
 

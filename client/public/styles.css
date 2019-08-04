@@ -9,6 +9,10 @@ body {
   font-weight: 600;
 }
 
+#link {
+  color: #00994C;
+}
+
 * {
   box-sizing: border-box;
 }

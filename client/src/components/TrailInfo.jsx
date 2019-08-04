@@ -6,13 +6,13 @@ export default class TrailInfo extends PureComponent {
 
     return (
       <div>
-        <img width={240} height={240} src={info.image} />
+        <img width={300} height={200} src={info.image} />
         <div id="title">{info.trail_name}</div>
         <div>{`Trail Length: ${info.length_roundtrip} miles, roundtrip`}</div>
         <div>{`Elevation: ${info.gain}ft`}</div>
         <div>{`Average Rating: ${info.rating}/5`}</div>
         <div>{`Parking Pass: ${info.parking_pass}`}</div>
-        <a target='_blank' href={info.link}>Learn More</a>
+        <a target='_blank' href={info.link} id="link">Learn More</a>
       </div>
     );
   }
