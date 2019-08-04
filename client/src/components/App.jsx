@@ -122,7 +122,7 @@ class App extends React.Component {
         <div style={{ height: "100vh" }}>
           <ReactMapGl
             {...viewport}
-            width={750}
+            width="100%"
             height="100%"
             mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
             mapboxApiAccessToken={token}

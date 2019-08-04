@@ -9,7 +9,7 @@ export default class TrailInfo extends PureComponent {
         <div>{info.trail_name}</div>
         <div>{`Trail Length: ${info.length_roundtrip} miles, roundtrip`}</div>
         <div>{`Elevation: ${info.gain}ft`}</div>
-        <div>{`Average Rating: ${info.rating}/5 Stars`}</div>
+        <div>{`Average Rating: ${info.rating}/5`}</div>
         <div>{`Parking Pass: ${info.parking_pass}`}</div>
         <a target='_blank' href={info.link}>Learn More</a>
       </div>
