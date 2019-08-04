@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMapGl, { Popup, Marker } from 'react-map-gl';
 import axios from 'axios';
 import Geocoder from 'react-mapbox-gl-geocoder';
+import styled from 'styled-components';
 import TOKEN from '../config/mapboxToken';
 import TrailMarker from './TrailMarker.jsx';
 import TrailInfo from './TrailInfo.jsx';
@@ -12,8 +13,17 @@ import TrailInfo from './TrailInfo.jsx';
 //    -trails by difficulty (gain & length)
 //    -trails by pass requirements
 //    -trails by rating
-//  Style application
-//  Implement a way to clear the markers so that a new address can be input without refreshing the page
+//  Reset Markers
+
+const StyledPopup = styled.div`
+  background: white;
+  color: #404040;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 3px;
+  border-radius: 2px;
+`;
 
 const searchPlaceholder = (props) => <input {...props} placeholder="Search" />
 
@@ -71,7 +81,8 @@ class App extends React.Component {
         rating: trail.rating,
         parking_pass: trail.parking_pass,
         region: trail.region,
-        link: trail.link
+        link: trail.link,
+        image: trail.image
       }
     }).sort((a, b) => a.distance_from_addr - b.distance_from_addr);
 
@@ -89,7 +100,7 @@ class App extends React.Component {
 
   handleViewportChange(viewport, item) {
     this.setState({viewport})
-    setTimeout(() => { this.sortTrails(); }, 3000);
+    setTimeout(() => { this.sortTrails(); }, 2000);
   }
 
   renderPopups() {
@@ -104,7 +115,9 @@ class App extends React.Component {
           closeOnClick={false}
           onClose={() => this.setState({ popupInfo: null })}
           >
-            <TrailInfo info={popupInfo} />
+            <StyledPopup>
+              <TrailInfo info={popupInfo} />
+            </StyledPopup>
         </Popup>
       )
     );
@@ -122,7 +135,7 @@ class App extends React.Component {
         <div style={{ height: "100vh" }}>
           <ReactMapGl
             {...viewport}
-            width={750}
+            width="100%"
             height="100%"
             mapStyle="mapbox://styles/fhabib229/cjthy79rr0ccb1fm8ok7tvzkc"
             mapboxApiAccessToken={token}

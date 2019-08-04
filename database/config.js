@@ -17,7 +17,8 @@ const trailsSchema = mongoose.Schema({
   parking_pass: String,
   region: String,
   distance_from_addr: Number,
-  link: String
+  link: String,
+  image: String
 });
 
 const Trails = mongoose.model('Trails', trailsSchema);
