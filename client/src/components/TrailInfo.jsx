@@ -6,6 +6,7 @@ export default class TrailInfo extends PureComponent {
 
     return (
       <div>
+        <img width={240} height={240} src={info.image} />
         <div id="title">{info.trail_name}</div>
         <div>{`Trail Length: ${info.length_roundtrip} miles, roundtrip`}</div>
         <div>{`Elevation: ${info.gain}ft`}</div>

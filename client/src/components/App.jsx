@@ -82,7 +82,8 @@ class App extends React.Component {
         rating: trail.rating,
         parking_pass: trail.parking_pass,
         region: trail.region,
-        link: trail.link
+        link: trail.link,
+        image: trail.image
       }
     }).sort((a, b) => a.distance_from_addr - b.distance_from_addr);
 
