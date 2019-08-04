@@ -13,8 +13,7 @@ import TrailInfo from './TrailInfo.jsx';
 //    -trails by difficulty (gain & length)
 //    -trails by pass requirements
 //    -trails by rating
-//  Style application
-//  Implement a way to clear the markers so that a new address can be input without refreshing the page
+//  Reset Markers
 
 const StyledPopup = styled.div`
   background: white;
